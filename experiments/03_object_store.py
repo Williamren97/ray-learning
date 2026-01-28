@@ -43,9 +43,9 @@ def main():
     # 方法2：使用对象存储（共享引用）
     # ========================================
     @ray.remote
-    def process_data_shared(data_ref):
+    def process_data_shared(data):
         """使用对象存储引用，避免重复序列化"""
-        data = ray.get(data_ref)  # 从对象存储获取
+        # Ray 会在任务启动前自动解引用 ObjectRef
         return np.sum(data)
     
     print("\n=== 直接传递（序列化）===")
